@@ -56,7 +56,6 @@
    let tg = window.Telegram.WebApp; //получаем объект webapp телеграма 
 
    tg.expand(); //расширяем на все окно  
-   tg.tgWebAppDebug = true;
 
    tg.MainButton.text = "Changed Text"; //изменяем текст кнопки 
    tg.MainButton.setText("Changed Text1"); //изменяем текст кнопки иначе
@@ -67,7 +66,12 @@
    let btn = document.getElementById("btn"); //получаем кнопку скрыть/показать 
 
    btn.addEventListener('click', function(){ //вешаем событие на нажатие html-кнопки
-      tg.sendData("some string that we need to send");
+      if (tg.MainButton.isVisible){ //если кнопка показана 
+         tg.MainButton.hide() //скрываем кнопку 
+      }
+      else{ //иначе
+         tg.MainButton.show() //показываем 
+      }
    });
 
    let btnED = document.getElementById("btnED"); //получаем кнопку активировать/деактивировать
@@ -103,8 +107,8 @@
 
 
    //работает только в attachment menu
-   let pic = document.createElement('img'); //создаем img
-   pic.src = tg.initDataUnsafe.user.photo_url; //задаём src 
-   usercard.appendChild(pic); //добавляем элемент в карточку 
+   // let pic = document.createElement('img'); //создаем img
+   // pic.src = tg.initDataUnsafe.user.photo_url; //задаём src 
+   // usercard.appendChild(pic); //добавляем элемент в карточку 
 </script>
 </html>
